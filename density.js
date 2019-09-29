@@ -1,8 +1,8 @@
 // lowercase stopwords
 class Density {
-  constructor(options = { limit: 1, characters: 0, stopwords: [] }) {
+  constructor(options = { words: 1, characters: 0, stopwords: [] }) {
     this.o = {
-      limit: options.limit,
+      words: options.words,
       characters: options.characters,
       stopwords: options.stopwords
     };
@@ -28,7 +28,7 @@ class Density {
     for(let i=0; i<array.length; i++) {
       let collection = '';
       // Loop limit to set x number of words
-      for(let j=0; j<this.o.limit; j++) {
+      for(let j=0; j<this.o.words; j++) {
         if(typeof array[i+j] === 'undefined') continue;
         if(j > 0) collection += ' ';
         collection += array[i+j];

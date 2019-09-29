@@ -5,10 +5,9 @@
 ## Features
 
 - Vanilla javascript with no dependencies
-- Very small code
-- Option to set stopwords to not be included
-- Option to set a minimum number of characters allowed
-- Option to set a limit of words on each row
+- Stopwords - Words to not be included
+- Characters - Min number of characters allowed
+- Words - Number of words on each row
 
 ## Setup
 
@@ -51,7 +50,7 @@ It will output an array in the console that looks like below.
 
 A minimum number of characters allowed. It's perfect if you need to skip short words.
 
-### `limit` (int)
+### `words` (int)
 
 The number of words on each row. Sometimes you may need two or three words on each row.
 
@@ -65,7 +64,7 @@ To skip words you can use an array of stopwords.
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
 let kd = new Density({
   characters: 3,
-  limit: 2,
+  words: 2,
   stopwords: ["here is", "a html"]
 });
 
