@@ -1,3 +1,4 @@
+// lowercase stopwords
 class Density {
   constructor(options = { limit: 1, characters: 0, stopwords: [] }) {
     this.o = {
@@ -7,14 +8,17 @@ class Density {
     };
   }
   set(content) {
-    this.content = content;
+    this.add(content);
+    this.htmlToText();
+    this.toLowercase();
+    this.toAlphanumeric();
+    this.stipWhitespace();
     this.process();
   }
   get density() {
     return this.results;
   }
   process() {
-    this.sanitize();
     let array = this.content.split(' ');
     let object_unsorted = {};
     let array_words = [];
@@ -53,17 +57,23 @@ class Density {
     array_results.sort((a, b) => b.count - a.count);
     this.results = array_results;
   }
-  toWords() {
+  add(content) {
+    this.content = content;
+  }
+  htmlToText() {
 		let div = document.createElement('div');
     div.innerHTML = html;
     
 		let text = div.textContent || div.innerText || '';
 		this.content = text.replace(/(\r\n|\n|\r)/gm, ' ');
-	}
-  sanitize() {
-    this.toWords();
+  }
+  toLowercase() {
     this.content = this.content.toLowerCase();
+  }
+  toAlphanumeric() {
     this.content = this.content.replace(/[^a-zA-Z0-9À-ž\s]/g, "");
+  }
+  stipWhitespace() {
     this.content = this.content.replace(/\s+/g, ' ').trim();
   }
 }

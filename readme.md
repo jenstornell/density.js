@@ -10,14 +10,24 @@
 - Option to set a minimum number of characters allowed
 - Option to set a limit of words on each row
 
+## Setup
+
+Place the script just before `</body>`.
+
+```html
+<script src="density.js"></script>
+```
+
 ## Usage
+
+Place the code below right below the `script` tag in the setup.
 
 ### Example
 
 ```js
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-
 let kd = new Density();
+
 kd.set(html);
 console.log(kd.density);
 ```
@@ -37,6 +47,18 @@ It will output an array in the console that looks like below.
 
 ## Options
 
+```js
+let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+let kd = new Density({
+  characters: 3,
+  limit: 2,
+  stopwords: ["here is", "a html"]
+});
+
+kd.set(html);
+console.log(kd.density);
+```
+
 ### `characters` (int)
 
 A minimum number of characters allowed. It's perfect if you need to skip short words.
@@ -48,6 +70,21 @@ The number of words on each row. Sometimes you may need two or three words on ea
 ### `stopwords` (array)
 
 To skip words you can use an array of stopwords.
+
+## Performance
+
+If you don't need to remove html tags, make every word lowercase, remove non alphanumerical characters or strip whitespace you can call each method one by one.
+
+```js
+let kd = new Density();
+kd.add(html);
+kd.htmlToText();
+kd.toLowercase();
+kd.toAlphanumeric();
+kd.stipWhitespace();
+kd.process(html);
+console.log(kd.density);
+```
 
 ## Donate
 

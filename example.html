@@ -27,5 +27,15 @@ let advanced = new Density({
 });
 advanced.set(html);
 console.log(advanced.density);
+
+// CUSTOM
+let custom = new Density();
+custom.add(html);
+custom.htmlToText();
+custom.toLowercase();
+custom.toAlphanumeric();
+custom.stipWhitespace();
+custom.process(html);
+console.log(custom.density);
 </script>
 </html>
