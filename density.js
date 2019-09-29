@@ -1,14 +1,12 @@
-// lowercase stopwords
-// fix options
 class Density {
   constructor(options = {}) {
     this.o = Object.assign({}, this.defaults(), options);
   }
   defaults() {
     return {
-      words: options.words,
-      characters: options.characters,
-      stopwords: options.stopwords
+      words: 1,
+      characters: 0,
+      stopwords: []
     };
   }
   set(content) {
@@ -19,7 +17,7 @@ class Density {
     this.stipWhitespace();
     this.process();
   }
-  get density() {
+  get() {
     return this.results;
   }
   process() {

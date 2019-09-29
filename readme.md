@@ -28,7 +28,7 @@ let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
 let kd = new Density();
 
 kd.set(html);
-console.log(kd.density);
+console.log(kd.get());
 ```
 
 ### Output
@@ -69,7 +69,7 @@ let kd = new Density({
 });
 
 kd.set(html);
-console.log(kd.density);
+console.log(kd.get());
 ```
 
 ## Performance
@@ -86,7 +86,7 @@ kd.toLowercase();
 kd.toAlphanumeric();
 kd.stipWhitespace();
 kd.process(html);
-console.log(kd.density);
+console.log(kd.get());
 ```
 
 ## Donate

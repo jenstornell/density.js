@@ -7,35 +7,34 @@
   <title>density.js - Example</title>
 </head>
 <body>
-  
-</body>
 <script src="density.js?time=<?= time(); ?>"></script>
 <script>
-let html = `<h1>A html heading</h1>
-<p>Here is a html paragraph</p>`;
+  let html = `<h1>A html heading</h1>
+  <p>Here is a html paragraph</p>`;
+  
+  // SIMPLE
+  let kd_simple = new Density();
+  kd_simple.set(html);
+  console.log(kd_simple.get());
 
-// SIMPLE
-let simple = new Density();
-simple.set(html);
-console.log(simple.density);
+  // ADVANCED
+  let kd_advanced = new Density({
+    characters: 5,
+    words: 2,
+    stopwords: ["here is"]
+  });
+  kd_advanced.set(html);
+  console.log(kd_advanced.get());
 
-// ADVANCED
-let advanced = new Density({
-  characters: 5,
-  words: 2,
-  stopwords: ["here is"]
-});
-advanced.set(html);
-console.log(advanced.density);
-
-// CUSTOM
-let custom = new Density();
-custom.add(html);
-custom.htmlToText();
-custom.toLowercase();
-custom.toAlphanumeric();
-custom.stipWhitespace();
-custom.process(html);
-console.log(custom.density);
+  // CUSTOM
+  let kd_custom = new Density();
+  kd_custom.add(html);
+  kd_custom.htmlToText();
+  kd_custom.toLowercase();
+  kd_custom.toAlphanumeric();
+  kd_custom.stipWhitespace();
+  kd_custom.process(html);
+  console.log(kd_custom.get());
 </script>
+</body>
 </html>
