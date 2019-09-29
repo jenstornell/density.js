@@ -1,5 +1,7 @@
 # density.js
 
+*Version: 1.0*
+
 ## Features
 
 - Vanilla javascript with no dependencies
@@ -8,7 +10,9 @@
 - Option to set a minimum number of characters allowed
 - Option to set a limit of words on each row
 
-### Simple example
+## Usage
+
+### Example
 
 ```js
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
@@ -20,7 +24,7 @@ console.log(kd.density);
 
 ### Output
 
-It will output an array that looks like below.
+It will output an array in the console that looks like below.
 
 ```text
 0: {count: 2, word: "a"}
@@ -44,6 +48,10 @@ The number of words on each row. Sometimes you may need two or three words on ea
 ### `stopwords` (array)
 
 To skip words you can use an array of stopwords.
+
+## Donate
+
+Donate to [DevoneraAB](https://www.paypal.me/DevoneraAB) if you want.
 
 ## License
 
