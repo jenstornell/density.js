@@ -2,6 +2,17 @@
 
 *Version: 1.0*
 
+A class to convert html or text content to keyword density. The output will be like below.
+
+```text
+{count: 2, word: "a"}
+{count: 2, word: "html"}
+{count: 1, word: "heading"}
+{count: 1, word: "here"}
+{count: 1, word: "is"}
+{count: 1, word: "paragraph"}
+```
+
 ## Features
 
 - Vanilla javascript with no dependencies
