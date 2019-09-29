@@ -46,17 +46,11 @@ It will output an array in the console that looks like below.
 
 ## Options
 
-### `characters` (int)
-
-A minimum number of characters allowed. It's perfect if you need to skip short words.
-
-### `words` (int)
-
-The number of words on each row. Sometimes you may need two or three words on each row.
-
-### `stopwords` (array)
-
-To skip words you can use an array of stopwords. Make sure that the stopwords are lowercase.
+| Key          | Type   | Description |
+| ------------ | ------- | ----------- |
+| `characters` | `int`   | A minimum number of characters allowed. It's perfect if you need to skip short words. |
+| `stopwords`  | `array` | To skip words you can use an array of stopwords. Make sure that the stopwords are lowercase. |
+| `words`      | `int`   | The number of words on each row. Sometimes you may need two or three words on each row. |
 
 ### Example - with options
 
