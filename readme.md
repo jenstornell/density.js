@@ -56,7 +56,7 @@ The number of words on each row. Sometimes you may need two or three words on ea
 
 ### `stopwords` (array)
 
-To skip words you can use an array of stopwords.
+To skip words you can use an array of stopwords. Make sure that the stopwords are lowercase.
 
 ### Example - with options
 
