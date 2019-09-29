@@ -1,10 +1,10 @@
-// lowercase stopwords
+// fix options
 class Density {
   constructor(options = { words: 1, characters: 0, stopwords: [] }) {
     this.o = {
       words: options.words,
       characters: options.characters,
-      stopwords: options.stopwords
+      stopwords: this.stopwordsLowercase(options.stopwords)
     };
   }
   set(content) {
@@ -56,6 +56,9 @@ class Density {
     // Sort array by occurrences
     array_results.sort((a, b) => b.count - a.count);
     this.results = array_results;
+  }
+  stopwordsLowercase(stopwords) {
+    return stopwords.join('|').toLowerCase().split('|');
   }
   add(content) {
     this.content = content;
