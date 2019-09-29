@@ -1,9 +1,14 @@
 class Density {
-  constructor(limit = 1) {
-    this.limit = limit;
+  constructor(options = { limit: 1, characters: 0, stopwords: [] }) {
+    this.o = {
+      limit: options.limit,
+      characters: options.characters,
+      stopwords: options.stopwords
+    };
   }
   set(content) {
     this.content = content;
+    this.process();
   }
   get density() {
     return this.results;
@@ -18,11 +23,14 @@ class Density {
     // Set x number of words to array
     for(let i=0; i<array.length; i++) {
       let collection = '';
-      for(let j=0; j<this.limit; j++) {
+      // Loop limit to set x number of words
+      for(let j=0; j<this.o.limit; j++) {
         if(typeof array[i+j] === 'undefined') continue;
         if(j > 0) collection += ' ';
         collection += array[i+j];
       }
+      if(this.o.stopwords.includes(collection)) continue;
+      if(collection.length <= this.o.characters) continue;
       array_words[i] = collection;
     }
 
