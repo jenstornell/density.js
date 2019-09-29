@@ -22,7 +22,7 @@ Place the script just before `</body>`.
 
 Place the code below right below the `script` tag in the setup.
 
-### Example
+### Example - Simple
 
 ```js
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
@@ -47,18 +47,6 @@ It will output an array in the console that looks like below.
 
 ## Options
 
-```js
-let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let kd = new Density({
-  characters: 3,
-  limit: 2,
-  stopwords: ["here is", "a html"]
-});
-
-kd.set(html);
-console.log(kd.density);
-```
-
 ### `characters` (int)
 
 A minimum number of characters allowed. It's perfect if you need to skip short words.
@@ -71,9 +59,25 @@ The number of words on each row. Sometimes you may need two or three words on ea
 
 To skip words you can use an array of stopwords.
 
+### Example - with options
+
+```js
+let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+let kd = new Density({
+  characters: 3,
+  limit: 2,
+  stopwords: ["here is", "a html"]
+});
+
+kd.set(html);
+console.log(kd.density);
+```
+
 ## Performance
 
 If you don't need to remove html tags, make every word lowercase, remove non alphanumerical characters or strip whitespace you can call each method one by one.
+
+### Example - Custom
 
 ```js
 let kd = new Density();
