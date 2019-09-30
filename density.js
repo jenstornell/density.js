@@ -64,7 +64,7 @@ class Density {
   }
   htmlToText() {
 		let div = document.createElement('div');
-    div.innerHTML = html;
+    div.innerHTML = this.content;
     
 		let text = div.textContent || div.innerText || '';
 		this.content = text.replace(/(\r\n|\n|\r)/gm, ' ');
