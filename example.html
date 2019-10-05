@@ -12,29 +12,21 @@
   let html = `<h1>A html heading</h1>
   <p>Here is a html paragraph</p>`;
 
-  // SIMPLE
-  let kd_simple = new Density();
-  kd_simple.set(html);
-  console.log(kd_simple.getSorted());
+  let results = null;
 
-  // ADVANCED
-  let kd_advanced = new Density({
+  // Simple sorted
+  results = density.getSorted(html); console.log(results);
+
+  // Simple unsorted
+  results = density.getUnsorted(html); console.log(results);
+
+  // Advanced - With args sorted
+  results = density.getSorted(html,{
     characters: 5,
     words: 2,
-    stopwords: ["here is"]
-  });
-  kd_advanced.set(html);
-  console.log(kd_advanced.getUnsorted());
-
-  // CUSTOM
-  let kd_custom = new Density();
-  kd_custom.add(html);
-  kd_custom.htmlToText();
-  kd_custom.toLowercase();
-  kd_custom.toAlphanumeric();
-  kd_custom.stipWhitespace();
-  kd_custom.process(html);
-  console.log(kd_custom.getSorted());
+    stopwords: ["here is"],
+    filter: ['toLowercase', 'toText', 'toAlpha']
+  }); console.log(results);
 </script>
 </body>
 </html>

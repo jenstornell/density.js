@@ -36,10 +36,8 @@ Place the code below right below the `script` tag in the setup.
 
 ```js
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let kd = new Density();
-
-kd.set(html);
-console.log(kd.getSorted());
+let results = density.getSorted(html);
+console.log(results);
 ```
 
 ### Output
@@ -67,31 +65,14 @@ It will output an array in the console that looks like below.
 
 ```js
 let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let kd = new Density({
+let results = density.getUnsorted(html, {
   characters: 3,
   words: 2,
-  stopwords: ["here is", "a html"]
+  stopwords: ["here is", "a html"],
+  filter: ['toText', 'toAlpha', 'toLowercase', 'stripWhitespace']
 });
 
-kd.set(html);
-console.log(kd.getSorted());
-```
-
-## Performance
-
-If you don't need to remove html tags, make every word lowercase, remove non alphanumerical characters or strip whitespace you can call each method one by one.
-
-### Example - Custom
-
-```js
-let kd = new Density();
-kd.add(html);
-kd.htmlToText();
-kd.toLowercase();
-kd.toAlphanumeric();
-kd.stipWhitespace();
-kd.process(html);
-console.log(kd.getUnsorted());
+console.log(results);
 ```
 
 ## Donate

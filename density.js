@@ -1,34 +1,65 @@
-class Density {
-  constructor(options = {}) {
-    this.o = Object.assign({}, this.defaults(), options);
-  }
-  defaults() {
+class density {
+  static defaults() {
     return {
       words: 1,
       characters: 0,
-      stopwords: []
+      stopwords: [],
+      filter: ["toText", "toAlpha", "toLowercase", "stripWhitespace"]
     };
   }
-  set(content) {
+  static set(content) {
     this.add(content);
-    this.htmlToText();
-    this.toLowercase();
-    this.toAlphanumeric();
-    this.stipWhitespace();
-    this.process();
+    
+    this.o.filter.forEach(filter => {
+      switch(filter) {
+        case 'toText':
+          this.toText();
+          break;
+        case 'toAlpha':
+          this.toAlpha();
+          break;
+        case 'toLowercase':
+          this.toLowercase();
+          break;
+        case 'stripWhitespace':
+          this.stripWhitespace();
+          break;
+      }
+      this.process();
+    });
   }
-  getUnsorted() {
+  static setOptions(options) {
+    this.o = Object.assign({}, this.defaults(), options);
+  }
+  static getUnsorted(content, options) {
+    this.setOptions(options);
+    this.set(content);
     return this.unsorted;
   }
-  getSorted() {
-    this.sorted = this.unsorted.sort((a, b) => b.count - a.count);
+  static getSorted(content, options = {}) {
+    this.setOptions(options);
+    this.set(content);
+    this.sort();
     return this.sorted;
   }
-  process() {
+  static sort() {
+    // Put it back as array to get it sortable by occurrences
+    let i = 0;
+    let array_results = [];
+    for(let collection in this.unsorted) {
+      array_results[i] = {
+        count: this.unsorted[collection],
+        word: collection
+      }
+      i++;
+    }
+
+    this.sorted = array_results.sort((a, b) => b.count - a.count);
+  }
+  static process() {
     let array = this.content.split(' ');
     let object_unsorted = {};
     let array_words = [];
-    let array_results = [];
 
     // Set x number of words to array
     for(let i=0; i<array.length; i++) {
@@ -49,35 +80,25 @@ class Density {
       object_unsorted[item] = (typeof object_unsorted[item] === 'undefined') ? 1 : object_unsorted[item]+1;
     });
 
-    // Put it back as array to get it sortable by occurrences
-    let i = 0;
-    for(let collection in object_unsorted) {
-      array_results[i] = {
-        count: object_unsorted[collection],
-        word: collection
-      }
-      i++;
-    }
-
-    this.unsorted = array_results;
+    this.unsorted = object_unsorted;
   }
-  add(content) {
+  static add(content) {
     this.content = content;
   }
-  htmlToText() {
+  static toText() {
 		let div = document.createElement('div');
     div.innerHTML = this.content;
     
 		let text = div.textContent || div.innerText || '';
 		this.content = text.replace(/(\r\n|\n|\r)/gm, ' ');
   }
-  toLowercase() {
+  static toLowercase() {
     this.content = this.content.toLowerCase();
   }
-  toAlphanumeric() {
+  static toAlpha() {
     this.content = this.content.replace(/[^a-zA-Z0-9À-ž\s]/g, "");
   }
-  stipWhitespace() {
+  static stripWhitespace() {
     this.content = this.content.replace(/\s+/g, ' ').trim();
   }
 }
