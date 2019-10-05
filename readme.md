@@ -35,8 +35,8 @@ Place the code below right below the `script` tag in the setup.
 ### Example - Simple
 
 ```js
-let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let results = density.getSorted(html);
+const html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+const results = density.getSorted(html);
 console.log(results);
 ```
 
@@ -71,13 +71,14 @@ or
 ### Example - with options
 
 ```js
-let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let results = density.getUnsorted(html, {
+const html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+const options = {
   characters: 3,
   words: 2,
   stopwords: ["here is", "a html"],
   filter: ['toText', 'toAlpha', 'toLowercase', 'stripWhitespace']
-});
+};
+const results = density.getUnsorted(html, options);
 
 console.log(results);
 ```
@@ -85,10 +86,11 @@ console.log(results);
 ### Example - with selected keywords
 
 ```js
-let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
-let results = density.getUnsorted(html, {
+const html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+const options = {
   selected: ['html heading', 'a', 'paragraphen']
-});
+};
+const results = density.getUnsorted(html, options);
 
 console.log(results);
 ```

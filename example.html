@@ -9,29 +9,36 @@
 <body>
 <script src="density.js"></script>
 <script>
-  let html = `<h1>A html heading</h1>
+  const html = `<h1>A html heading</h1>
   <p>Here is a html paragraph</p>`;
 
   let results = null;
+  let options = {};
 
   // Simple sorted
-  results = density.getSorted(html); console.log(results);
+  results = density.getSorted(html);
+  console.log(results);
 
   // Simple unsorted
-  results = density.getUnsorted(html); console.log(results);
+  results = density.getUnsorted(html);
+  console.log(results);
 
   // Advanced - With args sorted
-  results = density.getSorted(html,{
+  options = {
     characters: 5,
     stopwords: ["here is"],
     words: 2,
     filter: ['toText', 'toAlpha', 'toLowercase', 'stripWhitespace'],
-  }); console.log(results);
+  };
+  results = density.getSorted(html, options);
+  console.log(results);
 
   // Advanced - With selected words
-  results = density.getSorted(html,{
+  options = {
     selected: ['html heading', 'a', 'paragraphen']
-  }); console.log(results);
+  };
+  results = density.getSorted(html, options);
+  console.log(results);
 </script>
 </body>
 </html>
