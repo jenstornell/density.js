@@ -23,9 +23,13 @@
   // Advanced - With args sorted
   results = density.getSorted(html,{
     characters: 5,
-    words: 2,
     stopwords: ["here is"],
+    words: 2,
     filter: ['toText', 'toAlpha', 'toLowercase', 'stripWhitespace'],
+  }); console.log(results);
+
+  // Advanced - With selected words
+  results = density.getSorted(html,{
     selected: ['html heading', 'a', 'paragraphen']
   }); console.log(results);
 </script>

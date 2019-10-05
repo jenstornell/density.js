@@ -60,6 +60,13 @@ It will output an array in the console that looks like below.
 | `characters` | `int`   | A minimum number of characters allowed. It's perfect if you need to skip short words. |
 | `stopwords`  | `array` | To skip words you can use an array of stopwords. Make sure that the stopwords are lowercase. |
 | `words`      | `int`   | The number of words on each row. Sometimes you may need two or three words on each row. |
+| `filter`     | `array` | In case you have already sanitized the input you can only use the filters you need |
+
+or
+
+| Key          | Type   | Description |
+| ------------ | ------- | ----------- |
+| `selected`   | `array` | Only make a result of selected keywords |
 
 ### Example - with options
 
@@ -70,6 +77,17 @@ let results = density.getUnsorted(html, {
   words: 2,
   stopwords: ["here is", "a html"],
   filter: ['toText', 'toAlpha', 'toLowercase', 'stripWhitespace']
+});
+
+console.log(results);
+```
+
+### Example - with selected keywords
+
+```js
+let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
+let results = density.getUnsorted(html, {
+  selected: ['html heading', 'a', 'paragraphen']
 });
 
 console.log(results);
