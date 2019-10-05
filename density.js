@@ -4,7 +4,8 @@ class density {
       words: 1,
       characters: 0,
       stopwords: [],
-      filter: ["toText", "toAlpha", "toLowercase", "stripWhitespace"]
+      filter: ["toText", "toAlpha", "toLowercase", "stripWhitespace"],
+      selected: []
     };
   }
   static set(content) {
@@ -25,8 +26,13 @@ class density {
           this.stripWhitespace();
           break;
       }
-      this.process();
     });
+    
+    if(this.o.selected.length > 0) {
+      this.processSelected();
+    } else {
+      this.process();
+    }
   }
   static setOptions(options) {
     this.o = Object.assign({}, this.defaults(), options);
@@ -55,6 +61,15 @@ class density {
     }
 
     this.sorted = array_results.sort((a, b) => b.count - a.count);
+  }
+  static processSelected() {
+    let object_unsorted = {};
+
+    this.o.selected.forEach(phrase => {
+      object_unsorted[phrase] = vitimusOccurrences(' ' + this.content + ' ', ' ' + phrase + ' ', true);
+    });
+
+    this.unsorted = object_unsorted;
   }
   static process() {
     let array = this.content.split(' ');
@@ -101,4 +116,33 @@ class density {
   static stripWhitespace() {
     this.content = this.content.replace(/\s+/g, ' ').trim();
   }
+}
+
+/** Function that count occurrences of a substring in a string;
+ * @param {String} string               The string
+ * @param {String} subString            The sub string to search for
+ * @param {Boolean} [allowOverlapping]  Optional. (Default:false)
+ *
+ * @author Vitim.us https://gist.github.com/victornpb/7736865
+ * @see Unit Test https://jsfiddle.net/Victornpb/5axuh96u/
+ * @see http://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string/7924240#7924240
+ */
+function vitimusOccurrences(string, subString, allowOverlapping) {
+
+  string += "";
+  subString += "";
+  if (subString.length <= 0) return (string.length + 1);
+
+  var n = 0,
+      pos = 0,
+      step = allowOverlapping ? 1 : subString.length;
+
+  while (true) {
+      pos = string.indexOf(subString, pos);
+      if (pos >= 0) {
+          ++n;
+          pos += step;
+      } else break;
+  }
+  return n;
 }
