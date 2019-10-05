@@ -15,7 +15,7 @@
   // SIMPLE
   let kd_simple = new Density();
   kd_simple.set(html);
-  console.log(kd_simple.get());
+  console.log(kd_simple.getSorted());
 
   // ADVANCED
   let kd_advanced = new Density({
@@ -24,7 +24,7 @@
     stopwords: ["here is"]
   });
   kd_advanced.set(html);
-  console.log(kd_advanced.get());
+  console.log(kd_advanced.getUnsorted());
 
   // CUSTOM
   let kd_custom = new Density();
@@ -34,7 +34,7 @@
   kd_custom.toAlphanumeric();
   kd_custom.stipWhitespace();
   kd_custom.process(html);
-  console.log(kd_custom.get());
+  console.log(kd_custom.getSorted());
 </script>
 </body>
 </html>

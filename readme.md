@@ -1,6 +1,6 @@
 # density.js
 
-*Version: 1.0*
+*Version: 1.1*
 
 A class to convert html or text content to keyword density. The output will be like below.
 
@@ -39,7 +39,7 @@ let html = `<h1>A html heading</h1><p>Here is a html paragraph</p>`;
 let kd = new Density();
 
 kd.set(html);
-console.log(kd.get());
+console.log(kd.getSorted());
 ```
 
 ### Output
@@ -74,7 +74,7 @@ let kd = new Density({
 });
 
 kd.set(html);
-console.log(kd.get());
+console.log(kd.getSorted());
 ```
 
 ## Performance
@@ -91,7 +91,7 @@ kd.toLowercase();
 kd.toAlphanumeric();
 kd.stipWhitespace();
 kd.process(html);
-console.log(kd.get());
+console.log(kd.getUnsorted());
 ```
 
 ## Donate

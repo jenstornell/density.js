@@ -17,8 +17,12 @@ class Density {
     this.stipWhitespace();
     this.process();
   }
-  get() {
-    return this.results;
+  getUnsorted() {
+    return this.unsorted;
+  }
+  getSorted() {
+    this.sorted = this.unsorted.sort((a, b) => b.count - a.count);
+    return this.sorted;
   }
   process() {
     let array = this.content.split(' ');
@@ -55,9 +59,7 @@ class Density {
       i++;
     }
 
-    // Sort array by occurrences
-    array_results.sort((a, b) => b.count - a.count);
-    this.results = array_results;
+    this.unsorted = array_results;
   }
   add(content) {
     this.content = content;
