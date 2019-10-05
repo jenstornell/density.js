@@ -10,25 +10,25 @@ class density {
   }
   static set(content) {
     this.add(content);
-    
+
     this.o.filter.forEach(filter => {
-      switch(filter) {
-        case 'toText':
+      switch (filter) {
+        case "toText":
           this.toText();
           break;
-        case 'toAlpha':
+        case "toAlpha":
           this.toAlpha();
           break;
-        case 'toLowercase':
+        case "toLowercase":
           this.toLowercase();
           break;
-        case 'stripWhitespace':
+        case "stripWhitespace":
           this.stripWhitespace();
           break;
       }
     });
-    
-    if(this.o.selected.length > 0) {
+
+    if (this.o.selected.length > 0) {
       this.processSelected();
     } else {
       this.process();
@@ -52,11 +52,11 @@ class density {
     // Put it back as array to get it sortable by occurrences
     let i = 0;
     let array_results = [];
-    for(let collection in this.unsorted) {
+    for (let collection in this.unsorted) {
       array_results[i] = {
         count: this.unsorted[collection],
         word: collection
-      }
+      };
       i++;
     }
 
@@ -66,33 +66,40 @@ class density {
     let object_unsorted = {};
 
     this.o.selected.forEach(phrase => {
-      object_unsorted[phrase] = vitimusOccurrences(' ' + this.content + ' ', ' ' + phrase + ' ', true);
+      object_unsorted[phrase] = vitimusOccurrences(
+        " " + this.content + " ",
+        " " + phrase + " ",
+        true
+      );
     });
 
     this.unsorted = object_unsorted;
   }
   static process() {
-    let array = this.content.split(' ');
+    let array = this.content.split(" ");
     let object_unsorted = {};
     let array_words = [];
 
     // Set x number of words to array
-    for(let i=0; i<array.length; i++) {
-      let collection = '';
+    for (let i = 0; i < array.length; i++) {
+      let collection = "";
       // Loop limit to set x number of words
-      for(let j=0; j<this.o.words; j++) {
-        if(typeof array[i+j] === 'undefined') continue;
-        if(j > 0) collection += ' ';
-        collection += array[i+j];
+      for (let j = 0; j < this.o.words; j++) {
+        if (typeof array[i + j] === "undefined") continue;
+        if (j > 0) collection += " ";
+        collection += array[i + j];
       }
-      if(this.o.stopwords.includes(collection)) continue;
-      if(collection.length <= this.o.characters) continue;
+      if (this.o.stopwords.includes(collection)) continue;
+      if (collection.length <= this.o.characters) continue;
       array_words[i] = collection;
     }
 
     // Put the words as key and count the words occurrences
-    array_words.forEach((item) => {
-      object_unsorted[item] = (typeof object_unsorted[item] === 'undefined') ? 1 : object_unsorted[item]+1;
+    array_words.forEach(item => {
+      object_unsorted[item] =
+        typeof object_unsorted[item] === "undefined"
+          ? 1
+          : object_unsorted[item] + 1;
     });
 
     this.unsorted = object_unsorted;
@@ -101,11 +108,11 @@ class density {
     this.content = content;
   }
   static toText() {
-		let div = document.createElement('div');
+    let div = document.createElement("div");
     div.innerHTML = this.content;
-    
-		let text = div.textContent || div.innerText || '';
-		this.content = text.replace(/(\r\n|\n|\r)/gm, ' ');
+
+    let text = div.textContent || div.innerText || "";
+    this.content = text.replace(/(\r\n|\n|\r)/gm, " ");
   }
   static toLowercase() {
     this.content = this.content.toLowerCase();
@@ -114,7 +121,7 @@ class density {
     this.content = this.content.replace(/[^a-zA-Z0-9À-ž\s]/g, "");
   }
   static stripWhitespace() {
-    this.content = this.content.replace(/\s+/g, ' ').trim();
+    this.content = this.content.replace(/\s+/g, " ").trim();
   }
 }
 
@@ -128,21 +135,20 @@ class density {
  * @see http://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string/7924240#7924240
  */
 function vitimusOccurrences(string, subString, allowOverlapping) {
-
   string += "";
   subString += "";
-  if (subString.length <= 0) return (string.length + 1);
+  if (subString.length <= 0) return string.length + 1;
 
   var n = 0,
-      pos = 0,
-      step = allowOverlapping ? 1 : subString.length;
+    pos = 0,
+    step = allowOverlapping ? 1 : subString.length;
 
   while (true) {
-      pos = string.indexOf(subString, pos);
-      if (pos >= 0) {
-          ++n;
-          pos += step;
-      } else break;
+    pos = string.indexOf(subString, pos);
+    if (pos >= 0) {
+      ++n;
+      pos += step;
+    } else break;
   }
   return n;
 }
